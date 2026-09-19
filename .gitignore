@@ -5,6 +5,7 @@
 /local
 /acorn/dist
 /acorn-loose/dist
+/acorn-using/dist
 /acorn-walk/dist
 /yarn.lock
 !/acorn/dist/acorn.d.ts

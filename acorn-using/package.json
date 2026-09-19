@@ -1,0 +1,30 @@
+{
+  "name": "acorn-using",
+  "description": "Explicit resource management (using declarations) plugin for acorn",
+  "homepage": "https://github.com/acornjs/acorn",
+  "main": "dist/acorn-using.js",
+  "module": "dist/acorn-using.mjs",
+  "exports": {
+    ".": [
+      {
+        "import": "./dist/acorn-using.mjs",
+        "require": "./dist/acorn-using.js",
+        "default": "./dist/acorn-using.js"
+      },
+      "./dist/acorn-using.js"
+    ],
+    "./package.json": "./package.json"
+  },
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/acornjs/acorn.git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "acorn": "^8.10.0"
+  }
+}

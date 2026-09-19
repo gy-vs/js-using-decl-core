@@ -27,8 +27,11 @@
   require("./tests-numeric-separators.js");
   require("./tests-class-features-2022.js");
   require("./tests-module-string-names.js");
+  require("./tests-using.js");
   var acorn = require("../acorn")
   var acorn_loose = require("../acorn-loose")
+  var acorn_using = require("../acorn-using")
+  var ParserWithUsing = acorn.Parser.extend(acorn_using)
 
   var htmlLog = typeof document === "object" && document.getElementById('log');
   var htmlGroup = htmlLog;
@@ -68,7 +71,11 @@
   var stats, modes = {
     Normal: {
       config: {
-        parse: acorn.parse
+        parse: acorn.parse,
+        filter: function (test) {
+          var opts = test.options || {};
+          return !opts.usingPlugin;
+        }
       }
     },
     Loose: {
@@ -77,7 +84,18 @@
         loose: true,
         filter: function (test) {
           var opts = test.options || {};
-          return opts.loose !== false;
+          return opts.loose !== false && !opts.usingPlugin;
+        }
+      }
+    },
+    "Using plugin": {
+      config: {
+        parse: function (code, options) {
+          return ParserWithUsing.parse(code, options);
+        },
+        filter: function (test) {
+          var opts = test.options || {};
+          return !!opts.usingPlugin;
         }
       }
     }
